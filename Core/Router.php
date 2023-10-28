@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 class Router
 {
     /**
@@ -11,8 +12,9 @@ class Router
      * 
      * @param string $route The route URL
      * @param array $params Parameters (controller, action, etc.)
+     * @return void
      */
-    public function add($route, $params)
+    public function add(string $route, array $params): void
     {
         $this->routes[$route] = $params;
     }
@@ -22,7 +24,7 @@ class Router
      * 
      * @return array
      */
-    public function getRoutes()
+    public function getRoutes(): array
     {
         return $this->routes;
     }
