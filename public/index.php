@@ -20,5 +20,11 @@ $router->add('posts/new', ['controller' => 'Posts', 'action' => 'new']);
 
 // Display the routing table
 echo '<pre>';
-var_dump($router->getRoutes());
+//var_dump($router->getRoutes());
+$uri = trim($_SERVER['REQUEST_URI'], '/');
+if ($router->match($uri)) {
+    var_dump($router->getParams());
+} else {
+    echo 'no route found for URL: ' . $uri;
+}
 echo '</pre>';
