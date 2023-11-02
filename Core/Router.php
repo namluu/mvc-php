@@ -16,11 +16,20 @@ class Router
      * Add a route to the routing table
      * 
      * @param string $route The route URL
-     * @param array $params Parameters (controller, action, etc.)
+     * @param array|null $params Parameters (controller, action, etc.)
      * @return void
      */
-    public function add(string $route, array $params): void
+    public function add(string $route, array $params = []): void
     {
+        // escape forward slashes
+        $route = preg_replace('/\//', '\\/', $route);
+        // convert variable {controller}
+        $route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)', $route);
+        // convert variable {id:\d+}
+        $route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
+        
+        $route = '/^' . $route . '$/i';
+
         $this->routes[$route] = $params;
     }
 
@@ -45,7 +54,12 @@ class Router
     public function match($url): bool
     {
         foreach ($this->routes as $route => $params) {
-            if ($url == $route) {
+            if (preg_match($route, $url, $matches)) {
+                foreach ($matches as $key => $match) {
+                    if (is_string($key)) {
+                        $params[$key] = $match;
+                    }
+                }
                 $this->params = $params;
                 return true;
             }
