@@ -76,4 +76,56 @@ class Router
     {
         return $this->params;
     }
+
+    public function getParam(string $name, $default = null)
+    {
+        return $this->params[$name] ?? $default;
+    }
+
+    /**
+     * Dispatch the route create the controller object and run action method
+     * 
+     * @param string $url the route URL
+     * 
+     * @return void
+     */
+    public function dispatch(string $url): void
+    {
+        if ($this->match($url)) {
+            $controller = $this->getParam('controller');
+            $controller = $this->convertToStudlyCaps($controller);
+
+            if (class_exists($controller)) {
+                $controllerObject = new $controller();
+                $action = $this->getParam('action');
+                $action = $this->convertToCamelCase($action);
+
+                if (is_callable([$controllerObject, $action])) {
+                    $controllerObject->$action();
+                } else {
+                    echo "method $action in controller $controller not found";
+                }
+            } else {
+                echo "controller $controller not found";
+            }
+        }
+    }
+
+    /**
+     * Convert the string with hyphens to StudlyCaps
+     * e.g. post-authors => PostAuthors
+     */
+    public function convertToStudlyCaps(string $string): string
+    {
+        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
+    }
+
+    /**
+     * Convert the string with hyphens to camelCase
+     * e.g. add-new => addNew
+     */
+    public function convertToCamelCase(string $string): string
+    {
+        return lcfirst($this->convertToStudlyCaps($string));
+    }
 }

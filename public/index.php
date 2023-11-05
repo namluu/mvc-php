@@ -9,6 +9,7 @@ echo '<br>';
 $uri = trim($_SERVER['REQUEST_URI'], '/');
 echo 'request uri: ' . $uri;
 */
+require '../App/Controllers/Posts.php';
 require '../Core/Router.php';
 
 $router = new Router();
@@ -29,4 +30,5 @@ if ($router->match($uri)) {
 } else {
     echo 'no route found for URL: ' . $uri;
 }
+$router->dispatch($uri);
 echo '</pre>';
