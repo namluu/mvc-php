@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class Posts
+class Home
 {
     public function index()
     {
-        echo 'hello from the index action in Posts controller';
+        echo 'hello from the index action in Home controller';
     }
 
     public function create()

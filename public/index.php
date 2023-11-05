@@ -1,18 +1,17 @@
 <?php
-/*
-echo 'hello MVC ';
-echo '<br>';
-echo 'query string: ' . $_SERVER['QUERY_STRING'];
-echo '<br>';
-echo 'request uri: ' . $_SERVER['REQUEST_URI'];
-echo '<br>';
-$uri = trim($_SERVER['REQUEST_URI'], '/');
-echo 'request uri: ' . $uri;
-*/
-require '../App/Controllers/Posts.php';
-require '../Core/Router.php';
 
-$router = new Router();
+/**
+ * Autoloader
+ */
+spl_autoload_register(function ($class) {
+    $root = dirname(__DIR__);
+    $file = $root . '/' . str_replace('\\','/', $class) . '.php';
+    if (is_readable($file)) {
+        require $root . '/' . str_replace('\\' , '/', $class) . '.php';
+    }
+});
+
+$router = new Core\Router();
 
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
