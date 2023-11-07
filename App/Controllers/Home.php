@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class Home
+class Home extends \Core\Controller
 {
     public function index()
     {
@@ -14,5 +14,6 @@ class Home
     public function create()
     {
         echo 'hello from the create action in Posts controller';
+        echo '<p>query string '. htmlspecialchars(print_r($this->routeParams, true)) .' </p>';
     }
 }
