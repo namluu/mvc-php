@@ -20,6 +20,10 @@ $router->add('posts/new', ['controller' => 'Posts', 'action' => 'new']);
 $router->add('{controller}/{action}');
 $router->add('{controller}/{id:\d+}/{action}');
 
+$adminCustomLink = 'backend8090';
+$router->add($adminCustomLink . '/{controller}/{action}', ['namespace' => 'Admin']);
+$router->add($adminCustomLink . '/{controller}/{id:\d+}/{action}', ['namespace' => 'Admin']);
+
 // Display the routing table
 echo '<pre>';
 var_dump($router->getRoutes());
