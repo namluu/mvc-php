@@ -56,6 +56,8 @@ class Router
      */
     public function match($url): bool
     {
+        $url = $this->removeQueryStringVariables($url);
+
         foreach ($this->routes as $route => $params) {
             if (preg_match($route, $url, $matches)) {
                 foreach ($matches as $key => $match) {
@@ -131,5 +133,24 @@ class Router
     public function convertToCamelCase(string $string): string
     {
         return lcfirst($this->convertToStudlyCaps($string));
+    }
+
+    /**
+     * remove variable ?page=1&print=1... on the URL
+     * 
+     * @param string $url the full url
+     */
+    protected function removeQueryStringVariables($url): string
+    {
+        if ($url != '') {
+            $parts = explode('&', $url, 2);
+
+            if (strpos($parts[0], '=') === false) {
+                $url = $parts[0];
+            } else {
+                $url = '';
+            }
+        }
+        return $url;
     }
 }
