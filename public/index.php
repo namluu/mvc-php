@@ -24,14 +24,6 @@ $adminCustomLink = 'backend8090';
 $router->add($adminCustomLink . '/{controller}/{action}', ['namespace' => 'Admin']);
 $router->add($adminCustomLink . '/{controller}/{id:\d+}/{action}', ['namespace' => 'Admin']);
 
-// Display the routing table
-echo '<pre>';
-var_dump($router->getRoutes());
+// Start router
 $uri = trim($_SERVER['REQUEST_URI'], '/');
-if ($router->match($uri)) {
-    var_dump($router->getParams());
-} else {
-    echo 'no route found for URL: ' . $uri;
-}
 $router->dispatch($uri);
-echo '</pre>';

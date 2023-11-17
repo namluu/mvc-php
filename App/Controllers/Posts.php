@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use \Core\View;
+
 class Posts
 {
     public function index()
     {
-        echo 'hello from the index action in Posts controller';
+        View::render('Post/index.php');
     }
 
     public function create()
