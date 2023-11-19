@@ -6,9 +6,9 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Models\PostModel;
 
-class Posts
+class PostController
 {
-    public function index()
+    public function indexAction()
     {
         $posts = PostModel::getAll();
 
@@ -17,7 +17,7 @@ class Posts
         ]);
     }
 
-    public function create()
+    public function createAction()
     {
         echo 'hello from the create action in Posts controller';
     }

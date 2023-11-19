@@ -97,13 +97,13 @@ class Router
     public function dispatch(string $url): void
     {
         if ($this->match($url)) {
-            $controller = $this->getParam('controller');
+            $controller = $this->getParam('controller') . 'Controller';
             $controller = $this->convertToStudlyCaps($controller);
             $controller = $this->getNamespace() . $controller;
 
             if (class_exists($controller)) {
                 $controllerObject = new $controller($this->getParams());
-                $action = $this->getParam('action');
+                $action = $this->getParam('action') . 'Action';
                 $action = $this->convertToCamelCase($action);
 
                 if (is_callable([$controllerObject, $action])) {

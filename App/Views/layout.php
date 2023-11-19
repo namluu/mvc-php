@@ -8,7 +8,7 @@
 <body>
     <nav>
         <a href="/">Home</a> |
-        <a href="/posts/index">Posts</a>
+        <a href="/post/index">Posts</a>
     </nav>
     <?= $content ?>
 </body>
