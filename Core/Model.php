@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace Core;
+use App\Config;
 
 abstract class Model
 {
@@ -10,10 +11,10 @@ abstract class Model
         static $db = null;
 
         if ($db === null) {
-            $host = 'localhost';
-            $dbname = 'mvc';
-            $username = 'root';
-            $password = '';
+            $host = Config::DB_HOST;
+            $dbname = Config::DB_NAME;
+            $username = Config::DB_USER;
+            $password = Config::DB_PASS;
 
             try {
                 $db = new \PDO("mysql:host=$host;dbname=$dbname;charset=utf8", 
