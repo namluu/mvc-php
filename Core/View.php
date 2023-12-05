@@ -14,7 +14,7 @@ class View
             require $file;
             require $layout;
         } else {
-            echo $file . ' not found';
+            throw new \Exception($file . ' not found');
         }
     }
 }

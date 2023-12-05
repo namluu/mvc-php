@@ -19,6 +19,8 @@ abstract class Model
             try {
                 $db = new \PDO("mysql:host=$host;dbname=$dbname;charset=utf8", 
                                 $username, $password);
+                // throw an exception when an error occurs
+                $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 return $db;
             } catch (\PDOException $e) {
                 echo $e->getMessage();

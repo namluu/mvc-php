@@ -109,10 +109,10 @@ class Router
                 if (is_callable([$controllerObject, $action])) {
                     $controllerObject->$action();
                 } else {
-                    echo "method $action in controller $controller not found";
+                    throw new \Exception("method $action in controller $controller not found");
                 }
             } else {
-                echo "controller $controller not found";
+                throw new \Exception("controller $controller not found");
             }
         }
     }
