@@ -26,7 +26,10 @@ class Error
     public static function exceptionHandler($exception)
     {
         $code = $exception->getCode();
-        Error::setHttpStatusErrorCode($code);
+        if ($code != 404) {
+            $code = 500;
+        }
+        http_response_code($code);
 
         if (\App\Config::SHOW_ERRORS) {
             echo '<h1>Fatal error</h1>';
@@ -46,24 +49,14 @@ class Error
         }
     }
 
-    /**
-     * set code = 404 (not found)
-     * or 500 (general error)
-     */
-    protected static function setHttpStatusErrorCode($code)
-    {
-        if ($code != 404) {
-            $code = 500;
-        }
-        http_response_code($code);
-    }
-
     protected static function showHttpPageWhenHideError($code)
     {
+        /*
         if ($code == 404) {
             echo '<h1>Page not found</h1>';
         } else {
             echo '<h1>An error occurred</h1>';
-        }
+        }*/
+        View::render($code . '.html');
     }
 }
