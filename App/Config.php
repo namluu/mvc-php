@@ -8,13 +8,13 @@ class Config
     /**
      * Database info
      */
-    const DB_HOST = 'localhost';
+    const DB_HOST = 'db';
 
-    const DB_NAME = 'mvc';
+    const DB_NAME = 'wordpress';
 
-    const DB_USER = 'root';
+    const DB_USER = 'wordpress';
 
-    const DB_PASS = '';
+    const DB_PASS = 'wordpress';
 
     /**
      * Show or hide error
