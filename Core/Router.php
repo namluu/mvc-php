@@ -37,16 +37,6 @@ class Router
     }
 
     /**
-     * Get all the routes from the routing table
-     * 
-     * @return array
-     */
-    public function getRoutes(): array
-    {
-        return $this->routes;
-    }
-
-    /**
      * Match the route to the routes in the routing table, setting the $params
      * property if a route is found
      * 
@@ -70,21 +60,6 @@ class Router
             }
         }
         return false;
-    }
-
-    /**
-     * Get the currently matched parameters
-     * 
-     * @return array
-     */
-    public function getParams(): array
-    {
-        return $this->params;
-    }
-
-    public function getParam(string $name, $default = null)
-    {
-        return $this->params[$name] ?? $default;
     }
 
     /**
@@ -117,6 +92,31 @@ class Router
         } else {
             throw new \Exception('No route matched.', 404);
         }
+    }
+
+    /**
+     * Get all the routes from the routing table
+     * 
+     * @return array
+     */
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+
+    /**
+     * Get the currently matched parameters
+     * 
+     * @return array
+     */
+    public function getParams(): array
+    {
+        return $this->params;
+    }
+
+    public function getParam(string $name, $default = null)
+    {
+        return $this->params[$name] ?? $default;
     }
 
     /**
