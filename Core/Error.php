@@ -57,6 +57,6 @@ class Error
         } else {
             echo '<h1>An error occurred</h1>';
         }*/
-        View::render($code . '.html');
+        View::renderNoLayout($code . '.html');
     }
 }

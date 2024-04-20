@@ -6,7 +6,7 @@
 <ul>
     <?php foreach($posts as $post): ?>
         <li>
-            <h2><?= $post['title'] ?></h2>
+            <h2><a href="/post/<?= $post['id'] ?>/view/"><?= $post['title'] ?></a></h2>
             <p><?= $post['content'] ?></p>
         </li>
     <?php endforeach ?>

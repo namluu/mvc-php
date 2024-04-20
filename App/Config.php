@@ -20,5 +20,5 @@ class Config
      * Show or hide error
      */
     //const SHOW_ERRORS = true;
-    const SHOW_ERRORS = false;
+    const SHOW_ERRORS = true;
 }

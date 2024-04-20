@@ -82,7 +82,7 @@ class Router
                 $action = $this->convertToCamelCase($action);
 
                 if (is_callable([$controllerObject, $action])) {
-                    $controllerObject->$action();
+                    $controllerObject->$action($this->getParam('id'));
                 } else {
                     throw new \Exception("method $action in controller $controller not found");
                 }
